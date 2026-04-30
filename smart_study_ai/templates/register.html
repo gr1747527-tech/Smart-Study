@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0a0a1a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Register - Smart AI | 4D Luxury</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #8b5cf6;
+            --secondary: #6366f1;
+            --accent: #06b6d4;
+            --gold: #f59e0b;
+            --luxury-dark: #0a0a1a;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--luxury-dark);
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            overflow-y: auto;
+            perspective: 1500px;
+            padding: 20px;
+        }
+        
+        /* 4D Background */
+        .bg-orbs { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(100px); animation: orbFloat 12s ease-in-out infinite; }
+        .orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(139,92,246,0.3), transparent); top: -150px; right: -150px; }
+        .orb-2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(245,158,11,0.2), transparent); bottom: -100px; left: -100px; animation-delay: -4s; }
+        .orb-3 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(6,182,212,0.15), transparent); top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: -8s; }
+        .orb-4 { width: 250px; height: 250px; background: radial-gradient(circle, rgba(99,102,241,0.1), transparent); bottom: 30%; right: 25%; animation-delay: -6s; }
+        @keyframes orbFloat { 0%,100%{transform:translate(0,0)scale(1)} 33%{transform:translate(-70px,50px)scale(1.1)} 66%{transform:translate(60px,-40px)scale(0.9)} }
+        
+        /* Diamond Particles */
+        .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        .particle { position: absolute; width: 3px; height: 3px; background: var(--gold); border-radius: 1px; animation: particleDiamond 10s infinite; opacity: 0; transform: rotate(45deg); }
+        .particle:nth-child(1){left:10%;animation-delay:0s}.particle:nth-child(2){left:25%;animation-delay:2s}.particle:nth-child(3){left:40%;animation-delay:4s}.particle:nth-child(4){left:55%;animation-delay:6s}.particle:nth-child(5){left:70%;animation-delay:8s}.particle:nth-child(6){left:85%;animation-delay:3s}.particle:nth-child(7){left:15%;animation-delay:5s}.particle:nth-child(8){left:60%;animation-delay:7s}.particle:nth-child(9){left:35%;animation-delay:1s}.particle:nth-child(10){left:75%;animation-delay:9s}
+        @keyframes particleDiamond { 0%{transform:translateY(100vh)rotate(45deg)scale(0);opacity:0} 15%{opacity:1} 50%{transform:translateY(50vh)translateX(80px)rotate(225deg)scale(1.5);opacity:0.8} 85%{opacity:1} 100%{transform:translateY(-10vh)translateX(-50px)rotate(405deg)scale(0);opacity:0} }
+        
+        /* Register Card */
+        .register-card {
+            width: 100%;
+            max-width: 480px;
+            background: rgba(15, 15, 40, 0.65);
+            backdrop-filter: blur(80px);
+            -webkit-backdrop-filter: blur(80px);
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 30px 100px rgba(0,0,0,0.6), 0 0 150px rgba(139,92,246,0.2), 0 0 250px rgba(99,102,241,0.1), 0 0 60px rgba(245,158,11,0.08), inset 0 1px 0 rgba(255,255,255,0.04);
+            padding: 50px 40px;
+            position: relative;
+            z-index: 10;
+            transform-style: preserve-3d;
+            animation: cardFloat 8s ease-in-out infinite;
+            margin: auto;
+        }
+        @keyframes cardFloat { 0%,100%{transform:translateY(0)rotateX(0deg)rotateY(0deg)} 20%{transform:translateY(-14px)rotateX(2.5deg)rotateY(-2deg)} 40%{transform:translateY(-6px)rotateX(-1.5deg)rotateY(2.5deg)} 60%{transform:translateY(10px)rotateX(2deg)rotateY(-1.5deg)} 80%{transform:translateY(-9px)rotateX(-2deg)rotateY(1deg)} }
+        
+        .register-card::before {
+            content: ''; position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            border-radius: 42px;
+            background: linear-gradient(45deg, transparent, transparent 25%, rgba(139,92,246,0.4), rgba(245,158,11,0.3), rgba(6,182,212,0.4), transparent 75%, transparent);
+            background-size: 400% 400%;
+            z-index: -1;
+            animation: borderFlow 6s ease-in-out infinite;
+        }
+        @keyframes borderFlow { 0%,100%{background-position:0% 50%;opacity:0.6} 50%{background-position:100% 50%;opacity:1} }
+        
+        /* Animated Crown Logo */
+        .logo-container { text-align: center; margin-bottom: 15px; }
+        .logo-animated { display: inline-block; position: relative; width: 95px; height: 95px; animation: crownFloat 4s ease-in-out infinite; }
+        @keyframes crownFloat { 0%,100%{transform:translateY(0)rotateY(0deg)rotateX(0deg)} 30%{transform:translateY(-18px)rotateY(15deg)rotateX(5deg)} 60%{transform:translateY(3px)rotateY(-10deg)rotateX(-3deg)} }
+        .logo-inner {
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, #8b5cf6, #f59e0b, #06b6d4, #6366f1);
+            background-size: 300% 300%;
+            animation: crownGradient 4s ease-in-out infinite;
+            border-radius: 26px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 48px;
+            box-shadow: 0 15px 40px rgba(139,92,246,0.5), 0 0 80px rgba(245,158,11,0.3), 0 0 120px rgba(99,102,241,0.2);
+            position: relative; overflow: hidden;
+        }
+        @keyframes crownGradient { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+        .logo-inner::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.3), transparent 60%); animation: crownShine 3s ease-in-out infinite; }
+        @keyframes crownShine { 0%,100%{transform:translate(-30%,-30%)rotate(0deg)} 50%{transform:translate(30%,30%)rotate(180deg)} }
+        .logo-rings { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 115px; height: 115px; border: 2px solid rgba(139,92,246,0.3); border-radius: 32px; animation: ringPulse 2s ease-in-out infinite; }
+        @keyframes ringPulse { 0%,100%{width:115px;height:115px;opacity:0.5} 50%{width:135px;height:135px;opacity:0} }
+        .logo-rings:nth-child(2){animation-delay:0.5s;border-color:rgba(245,158,11,0.2)}.logo-rings:nth-child(3){animation-delay:1s;border-color:rgba(6,182,212,0.15)}
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            font-size: 2.3em; font-weight: 900; letter-spacing: 4px;
+            background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 25%, #fbbf24 55%, #a5f3fc 85%);
+            background-clip: text; -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; color: transparent;
+            margin-bottom: 5px;
+        }
+        .subtitle { text-align: center; color: rgba(255,255,255,0.5); font-size: 0.85em; letter-spacing: 3px; margin-bottom: 35px; font-weight: 300; text-transform: uppercase; }
+        
+        .flash { padding: 14px 20px; border-radius: 16px; margin-bottom: 20px; font-size: 13px; font-weight: 500; animation: slideDown 0.6s cubic-bezier(0.175,0.885,0.32,1.275); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+        @keyframes slideDown { from{opacity:0;transform:translateY(-30px)scale(0.95)} to{opacity:1;transform:translateY(0)scale(1)} }
+        .flash.error { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: #fca5a5; }
+        .flash.success { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: #86efac; }
+        
+        .input-group { margin-bottom: 22px; position: relative; }
+        label { display: block; color: rgba(255,255,255,0.7); margin-bottom: 10px; font-size: 0.85em; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; }
+        .input-wrapper { position: relative; }
+        .input-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); font-size: 18px; z-index: 2; pointer-events: none; transition: all 0.3s; }
+        input {
+            width: 100%; padding: 16px 20px 16px 50px;
+            border: 2px solid rgba(255,255,255,0.08);
+            border-radius: 18px;
+            background: rgba(0,0,0,0.5);
+            color: white; font-size: 15px;
+            font-family: 'Poppins', sans-serif;
+            outline: none;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+        }
+        input:focus { border-color: #a78bfa; box-shadow: 0 0 30px rgba(139,92,246,0.2), 0 0 60px rgba(139,92,246,0.1), inset 0 0 30px rgba(139,92,246,0.05); background: rgba(0,0,0,0.7); transform: translateY(-2px); }
+        input:focus ~ .input-icon { color: #a78bfa; filter: drop-shadow(0 0 8px rgba(139,92,246,0.5)); }
+        input::placeholder { color: rgba(255,255,255,0.2); font-style: italic; }
+        
+        .btn-luxury {
+            width: 100%; padding: 18px; border: none; border-radius: 18px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 30%, #06b6d4 60%, #f59e0b 100%);
+            background-size: 200% 200%;
+            color: white; font-size: 16px; font-weight: 700;
+            font-family: 'Poppins', sans-serif; letter-spacing: 2px; cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.175,0.885,0.32,1.275);
+            box-shadow: 0 10px 40px rgba(139,92,246,0.4), 0 0 80px rgba(139,92,246,0.2);
+            margin-top: 15px; position: relative; overflow: hidden;
+            text-transform: uppercase;
+            animation: btnGradient 4s ease-in-out infinite;
+        }
+        @keyframes btnGradient { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+        .btn-luxury::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent); transition: left 0.8s; }
+        .btn-luxury::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1), transparent); animation: btnPulse 2s infinite; }
+        @keyframes btnPulse { 0%,100%{transform:scale(0.8);opacity:0.3} 50%{transform:scale(1.2);opacity:0.1} }
+        .btn-luxury:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 20px 60px rgba(139,92,246,0.6), 0 0 120px rgba(139,92,246,0.3), 0 0 200px rgba(245,158,11,0.2); letter-spacing: 4px; }
+        .btn-luxury:hover::before { left: 100%; }
+        .btn-luxury:active { transform: scale(0.95); }
+        
+        .footer-text { text-align: center; margin-top: 30px; color: rgba(255,255,255,0.4); font-size: 0.85em; letter-spacing: 0.5px; }
+        .footer-text a { color: var(--gold); text-decoration: none; font-weight: 600; transition: all 0.3s; position: relative; }
+        .footer-text a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s; }
+        .footer-text a:hover { color: #fff; text-shadow: 0 0 20px var(--gold); }
+        .footer-text a:hover::after { width: 100%; }
+        
+        /* ========== RESPONSIVE MEDIA QUERIES ========== */
+        
+        /* Large Tablets */
+        @media (max-width: 1024px) {
+            .register-card { max-width: 440px; padding: 45px 35px; }
+            h1 { font-size: 2.1em; }
+            .logo-animated { width: 80px; height: 80px; }
+            .logo-inner { font-size: 40px; }
+            .logo-rings { width: 100px; height: 100px; }
+        }
+        
+        /* Tablets */
+        @media (max-width: 768px) {
+            body { padding: 15px; align-items: flex-start; padding-top: 40px; }
+            .register-card { max-width: 420px; padding: 40px 30px; border-radius: 35px; animation: none; }
+            .register-card::before { border-radius: 37px; }
+            h1 { font-size: 1.9em; letter-spacing: 3px; }
+            .subtitle { font-size: 0.75em; letter-spacing: 2px; margin-bottom: 30px; }
+            .logo-animated { width: 70px; height: 70px; }
+            .logo-inner { font-size: 35px; border-radius: 20px; }
+            .logo-rings { width: 90px; height: 90px; border-radius: 24px; }
+            input { padding: 14px 18px 14px 45px; font-size: 14px; }
+            .btn-luxury { padding: 16px; font-size: 15px; letter-spacing: 1.5px; }
+            .orb-1 { width: 350px; height: 350px; }
+            .orb-2 { width: 280px; height: 280px; }
+            .orb-3 { width: 200px; height: 200px; }
+        }
+        
+        /* Mobile Phones */
+        @media (max-width: 480px) {
+            body { padding: 10px; align-items: flex-start; padding-top: 20px; }
+            .register-card { max-width: 100%; padding: 30px 20px; border-radius: 28px; animation: none; margin: 10px; }
+            .register-card::before { border-radius: 30px; }
+            h1 { font-size: 1.6em; letter-spacing: 2px; }
+            .subtitle { font-size: 0.7em; letter-spacing: 1.5px; margin-bottom: 25px; }
+            .logo-animated { width: 60px; height: 60px; margin-bottom: 5px; }
+            .logo-inner { font-size: 28px; border-radius: 16px; }
+            .logo-rings { width: 75px; height: 75px; border-radius: 22px; }
+            .input-group { margin-bottom: 16px; }
+            label { font-size: 0.75em; margin-bottom: 6px; }
+            input { padding: 12px 16px 12px 40px; font-size: 13px; border-radius: 14px; }
+            .input-icon { left: 14px; font-size: 16px; }
+            .btn-luxury { padding: 14px; font-size: 14px; letter-spacing: 1px; border-radius: 14px; margin-top: 10px; }
+            .flash { padding: 10px 16px; font-size: 12px; border-radius: 12px; margin-bottom: 15px; }
+            .footer-text { margin-top: 20px; font-size: 0.75em; }
+            .orb-1 { width: 200px; height: 200px; top: -80px; right: -80px; }
+            .orb-2 { width: 150px; height: 150px; bottom: -50px; left: -50px; }
+            .orb-3 { width: 120px; height: 120px; }
+        }
+        
+        /* Small Mobile Phones */
+        @media (max-width: 360px) {
+            .register-card { padding: 25px 15px; border-radius: 24px; }
+            h1 { font-size: 1.3em; letter-spacing: 1.5px; }
+            .subtitle { font-size: 0.65em; letter-spacing: 1px; }
+            .logo-animated { width: 50px; height: 50px; }
+            .logo-inner { font-size: 24px; border-radius: 14px; }
+            .logo-rings { width: 65px; height: 65px; }
+            label { font-size: 0.7em; }
+            input { padding: 10px 14px 10px 36px; font-size: 12px; }
+            .input-icon { left: 12px; font-size: 14px; }
+            .btn-luxury { padding: 12px; font-size: 13px; }
+        }
+        
+        /* Landscape Mode */
+        @media (max-height: 600px) and (orientation: landscape) {
+            body { align-items: center; padding: 10px; }
+            .register-card { padding: 20px 25px; max-width: 550px; }
+            .logo-animated { width: 50px; height: 50px; margin-bottom: 5px; }
+            .logo-inner { font-size: 24px; }
+            h1 { font-size: 1.4em; margin-bottom: 0; }
+            .subtitle { margin-bottom: 12px; font-size: 0.65em; }
+            .input-group { margin-bottom: 10px; }
+            input { padding: 10px 14px 10px 40px; }
+            .btn-luxury { padding: 12px; margin-top: 5px; }
+            .footer-text { margin-top: 12px; }
+        }
+        
+        /* High DPI */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .register-card { border-width: 0.5px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+    </div>
+    
+    <div class="particles">
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+    
+    <div class="register-card" id="registerCard">
+        <div class="logo-container">
+            <div class="logo-animated">
+                <div class="logo-rings"></div>
+                <div class="logo-rings"></div>
+                <div class="logo-rings"></div>
+                <div class="logo-inner">👑</div>
+            </div>
+        </div>
+        
+        <h1>Join Smart AI</h1>
+        <p class="subtitle">✦ Create Your 4D Luxury Account ✦</p>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <form method="POST">
+            <div class="input-group">
+                <label>👤 Choose Username</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">👑</span>
+                    <input type="text" name="username" placeholder="Your royal username" required autofocus>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label>📧 Email Address</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">💎</span>
+                    <input type="email" name="email" placeholder="Your premium email" required>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label>🔒 Create Password</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">🔐</span>
+                    <input type="password" name="password" placeholder="Min 6 characters" required minlength="6">
+                </div>
+            </div>
+            
+            <button type="submit" class="btn-luxury">✦ Create Luxury Account ✦</button>
+        </form>
+        
+        <div class="footer-text">
+            Already a member? <a href="{{ url_for('login') }}">Sign in here</a>
+        </div>
+    </div>
+    
+    <script>
+        const card = document.getElementById('registerCard');
+        if (window.innerWidth > 768) {
+            document.addEventListener('mousemove', (e) => {
+                const rx = (window.innerHeight / 2 - e.pageY) / 35;
+                const ry = (e.pageX - window.innerWidth / 2) / 35;
+                card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+            });
+            document.addEventListener('mouseleave', () => {
+                card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+            });
+        }
+    </script>
+</body>
+</html>
